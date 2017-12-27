@@ -1,0 +1,22 @@
+{
+  "name": "com.itfun.roadtrip",
+  "displayName": "RoadTrip by ITFUN",
+  "version": "1.0.0",
+  "description": "RoadTrip by ITFUN.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Apache Cordova Team",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "cordova-plugin-device": "^1.1.7",
+    "cordova-plugin-geolocation": "^3.0.0"
+  },
+  "cordova": {
+    "plugins": {
+      "cordova-plugin-device": {},
+      "cordova-plugin-geolocation": {}
+    }
+  }
+}
