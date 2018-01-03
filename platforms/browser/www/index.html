@@ -23,16 +23,19 @@
             </div>
           </div>
           <div id="content">
-            <div id="map"></div>
-            <button class="btn" id="save" type="button">Save Position</button>
-            <div id="all" class="card">
+            <div id="map-container">
+                <div id="map"></div>
             </div>
+            <button class="btn" id="save" type="button">Save Position</button>
+            <ul id="all"></ul>
           </div>
-        <script type="text/javascript" src="cordova.js"></script>
-        <script type="text/javascript" src="js/scripts.js"></script>
-        <!-- google maps api key -->
-        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB2s7lfbqZ-TxZ5KzNVkva05ELxDreD5YY&callback=initMap"
-    async defer></script>
+            <!-- firebase -->
+            <script src="https://www.gstatic.com/firebasejs/4.8.1/firebase.js"></script>
+            <script type="text/javascript" src="cordova.js"></script>
+            <script type="text/javascript" src="js/scripts.js"></script>
+            <!-- google maps api key -->
+            <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB2s7lfbqZ-TxZ5KzNVkva05ELxDreD5YY&callback=initMap"
+        async defer></script>
         
     </body>
 </html>
