@@ -29,7 +29,16 @@ var config = {
 };
 firebase.initializeApp(config);
 var dbRefTeam = firebase.database().ref('ITFUN');
+var dbRefTeamMembers = dbRefTeam.child('team_members');
 var dbRefMarkers = dbRefTeam.child('markers');
+var teamMembers = {
+    dev_1: 'Serhii Ovcharenko',
+    dev_2: 'Nataliia Stefurak',
+    dev_3: 'Valentyn Simeiko',
+    dev_4: 'Sergii Kuts'
+}
+//set team members to firebase
+dbRefTeamMembers.set(teamMembers);
 //show data from firebase
 //change list when added
 dbRefMarkers.on('child_added', function (data) {
