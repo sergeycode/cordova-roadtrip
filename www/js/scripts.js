@@ -1,10 +1,14 @@
 //buttons
 var save = document.getElementById('save');
+var refresh = document.getElementById('refresh');
+//message area
+var message = document.getElementById('message');
 //containers
 var mapContainer = document.getElementById('map-container');
 var allPositions = document.getElementById('all');
-//input value
-var desc = document.getElementById('desc');
+//inputs
+var locName = document.getElementById('name');
+var locDesc = document.getElementById('desc');
 //google maps
 var map;
 var marker;
@@ -32,14 +36,15 @@ dbRefMarkers.on('child_added', function (data) {
     var li = document.createElement('li');
     var dbLat = data.val().latitude;
     var dbLng = data.val().longitude;
+    var dbName = data.val().name;
     var dbDesc = data.val().desc;
     //generage map as image
-    dbMap = "http://maps.googleapis.com/maps/api/staticmap?center=" + 
+    var dbMap = "http://maps.googleapis.com/maps/api/staticmap?center=" + 
                 dbLat + "," + dbLng + 
                 "&zoom=14&size=" + 120 + "x" + 120 + 
                 "&maptype=roadmap&markers=color:red%7C" +
                 dbLat + "," + dbLng + "&sensor=false";
-    li.innerHTML = '<img class="map-img" src="' + dbMap + '">' + '<p class="map-desc">Description: <br> ' + dbDesc + '</p>';
+    li.innerHTML = '<img class="map-img" src="' + dbMap + '">' + '<p class="map-desc">Name: <br> ' + dbName + '<br> Description: <br>' + dbDesc + '</p>';
     li.id = data.key;
     //create li elements with data
     allPositions.appendChild(li);
@@ -68,16 +73,41 @@ function onSuccess(position) {
     marker.setMap(map);
     
     save.addEventListener('click', function () {
-        //get value of textarea
-        var descValue = desc.value;
+        //get value of name
+        var nameValue = locName.value;
+        //get value of description
+        var descValue = locDesc.value;
+        //if values are empty
+        if (!nameValue) {
+            nameValue = 'No name';
+        }
+        if (!descValue) {
+            descValue = 'No description';
+        }
         //data object
         var data = {
             latitude: myCoords.lat,
             longitude: myCoords.lng,
+            name: nameValue,
             desc: descValue
         };
         //save data to firebase
         dbRefMarkers.push(data);
+        //disable name text
+        locName.disabled = 'true';
+        //disable discription text
+        locDesc.disabled = 'true';
+        //disable button
+        this.disabled = 'true';
+        this.style.backgroundColor = '#93ced6';
+        //message
+        message.style.display = 'block';
+        message.innerHTML = '<p>Position saved. Please, scroll down to see all saved positions. Or tap Refresh Position to get new position.</p>'
+    });
+    refresh.addEventListener('click', function () {
+        //reload the page
+        location.reload();
+        alert('Location refreshed');
     });
 }
 function onError(error) {

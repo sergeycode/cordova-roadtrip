@@ -9,15 +9,18 @@
     </head>
     <body>
         <div id="header">
-            <div id="name">RoadTrip by ITFUN</div>
+            <div id="app-name">RoadTrip by ITFUN</div>
         </div>
           <div id="content">
             <div id="map-header" class="card">Your current position</div>
             <div id="map-container">
                 <div id="map"></div>
             </div>
-            <textarea id="desc" rows="3" placeholder="Description"></textarea>
+            <input id="name" type="text" placeholder="Add location name:">
+            <textarea id="desc" rows="3" placeholder="Add description:"></textarea>
             <button class="btn" id="save" type="button">Save Position</button>
+            <div id="message" class="card"></div>
+            <button class="btn" id="refresh" type="button">Refresh Position</button>
             <div id="all-header" class="card">All saved positions</div>
             <ul id="all"></ul>
           </div>
