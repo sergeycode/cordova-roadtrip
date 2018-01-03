@@ -8,16 +8,16 @@ var save = document.getElementById('save');
 
 var mapContainer = document.getElementById('map-container');
 var allPositions = document.getElementById('all');
-
 //google maps
 var map;
 var marker;
 function initMap() {
     map = new google.maps.Map(document.getElementById('map'), {
-        zoom: 13,
+        zoom: 8,
+        center: {lat: 42.9854526, lng: -81.2449256},
         disableDefaultUI: true
     });
-}
+};
 //firebase
 // Initialize Firebase
 var config = {
@@ -53,12 +53,7 @@ dbRefMarkers.on('child_removed', function (data) {
 btnMap.addEventListener('click', function() {
     //hide all positions if visible
     if (allPositions.style.display === 'block') {
-        allPositions.style.visibility = 'hidden';
-        allPositions.style.opacity = '0';
-        //set dysplay to none to remove all positions block from DOM but keep animation so we need to set timeout
-        setTimeout(function () {
-            allPositions.style.display = 'none';
-        }, 550);
+        allPositions.style.display = 'none';
     }
     //animate menu
     menuLine.forEach( function (e) {
@@ -70,25 +65,13 @@ btnMap.addEventListener('click', function() {
     this.style.color = 'rgba(255, 255, 255, 0.4)';
     btnAll.style.color = 'rgba(255, 255, 255, 0.7)';
     //show map
-    setTimeout(function () {
-        mapContainer.style.display = 'block';
-    }, 550);
-    setTimeout(function () {
-        mapContainer.style.visibility = 'visible';
-        mapContainer.style.opacity = '1';
-    }, 600);
+    mapContainer.style.display = 'block';
     //show button
-    setTimeout(function () {
-        save.style.display = 'block';
-    }, 550);
-    setTimeout(function () {
-        save.style.visibility = 'visible';
-        save.style.opacity = '1';
-        save.style.webkitTransform = 'translate3d(0, -10px, 0)';
-    }, 600);
+    save.style.display = 'block';
     
     //get current position
     navigator.geolocation.getCurrentPosition(onSuccess, onError, { enableHighAccuracy: true });
+    
     function onSuccess(position) {
         // coordinates
         var myCoords = {lat: position.coords.latitude, lng: position.coords.longitude};
@@ -98,6 +81,8 @@ btnMap.addEventListener('click', function() {
         marker = new google.maps.Marker({
             position: myCoords
           });
+        //set zoom
+        map.setZoom(13);
         //set marker
         marker.setMap(map);
         //save marker to firebase
@@ -113,6 +98,7 @@ btnMap.addEventListener('click', function() {
             marker = null;
         });
     };
+    
     function onError(error) {
         alert('code: '    + error.code    + '\n' +
             'message: ' + error.message + '\n');
@@ -137,55 +123,24 @@ btnAll.addEventListener('click', function() {
         e.classList.add('rotate');
     });
     //hide map
-    mapContainer.style.visibility = 'hidden';
-    mapContainer.style.opacity = '0';
-    setTimeout(function () {
-        mapContainer.style.display = 'none';
-    }, 550);
+    mapContainer.style.display = 'none';
     //hide button
-    save.style.visibility = 'hidden';
-    save.style.opacity = '0';
-    save.style.webkitTransform = 'translate3d(0, 0, 0)';
-    setTimeout(function () {
-        save.style.display = 'none';
-    }, 550);
+    save.style.display = 'none';
+    //show all positions
     allPositions.style.display = 'block';
-    setTimeout(function () {
-        allPositions.style.visibility = 'visible';
-        allPositions.style.opacity = '1';
-    }, 550);
-
-    // dbRefMarkers.on('value', gotData, errData);
-
-    // function gotData(data) {
-    //     var allMarkers = data.val();
-    //     var keys = Object.keys(allMarkers);
-    //     for (var i = 0; i < keys.length; i++) {
-    //         var k = keys[i];
-    //         var lat = allMarkers[k].latitude;
-    //         var long = allMarkers[k].longitude;
-    //         var li = document.createElement('li');
-    //         li.innerHTML = 'latitude: ' + lat + '<br>' + 'longitude: ' + long;
-    //         allPositions.appendChild(li);
-    //     }
-        
-    // }
-    // function errData(data) {
-    //     console.log(data);
-    // }
 });
 
 
 
 //menu button change from humburger to X
-menu.addEventListener( 'click', function() {
-    if (nav.style.visibility === 'hidden') {
-        menuLine.forEach( function (e) {
-            e.classList.add('rotate');
-        });
-    } else {
-        menuLine.forEach( function (e) {
-            e.classList.remove('rotate');
-        });
-    }
-});
+// menu.addEventListener( 'click', function() {
+//     if (nav.style.visibility === 'hidden') {
+//         menuLine.forEach( function (e) {
+//             e.classList.add('rotate');
+//         });
+//     } else {
+//         menuLine.forEach( function (e) {
+//             e.classList.remove('rotate');
+//         });
+//     }
+// });
