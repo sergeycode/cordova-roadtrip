@@ -9,24 +9,16 @@
     </head>
     <body>
         <div id="header">
-            <div class="container" id="menu-bar">
-            <div id="menu">
-                <div class="menu-line"></div>
-                <div class="menu-line"></div>
-                <div class="menu-line"></div>
-            </div>
-              <div id="name">RoadTrip</div>
-            </div>
-            <div class="container">
-              <button class="btn" id="show-map" type="button">Show me on map</button>
-              <button class="btn" id="show-all" type="button">All positions</button>
-            </div>
-          </div>
+            <div id="name">RoadTrip by ITFUN</div>
+        </div>
           <div id="content">
+            <div id="map-header" class="card">Your current position</div>
             <div id="map-container">
                 <div id="map"></div>
             </div>
+            <textarea id="desc" rows="3" placeholder="Description"></textarea>
             <button class="btn" id="save" type="button">Save Position</button>
+            <div id="all-header" class="card">All saved positions</div>
             <ul id="all"></ul>
           </div>
             <!-- firebase -->
