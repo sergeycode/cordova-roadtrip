@@ -1,3 +1,4 @@
+
 //buttons
 var save = document.getElementById('save');
 var refresh = document.getElementById('refresh');
@@ -12,11 +13,11 @@ var locDesc = document.getElementById('desc');
 //google maps
 var map;
 var marker;
-function initMap() {
-    map = new google.maps.Map(document.getElementById('map'), {
-        disableDefaultUI: true
-    });
-}
+// function initMap() {
+//     map = new google.maps.Map(document.getElementById('map'), {
+//         disableDefaultUI: true
+//     });
+// }
 //firebase
 // Initialize Firebase
 var config = {

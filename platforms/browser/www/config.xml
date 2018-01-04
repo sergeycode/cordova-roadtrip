@@ -5,10 +5,10 @@
     </feature>
     <name>RoadTrip by ITFUN</name>
     <description>
-        App that 
+        App for travelers to capture a summary of their trip
     </description>
     <author email="s_ovcharenko@fanshaweonline.ca" href="http://www.fanshawec.ca">
-        ITFUN
+        ITFUN group: Serhii Ovcharenko, Nataliia Stefurak, Valentyn Simeiko, Sergii Kuts
     </author>
     <content src="index.html" />
     <access origin="*" />

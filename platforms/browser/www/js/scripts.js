@@ -1,3 +1,4 @@
+
 //buttons
 var save = document.getElementById('save');
 var refresh = document.getElementById('refresh');
@@ -12,11 +13,11 @@ var locDesc = document.getElementById('desc');
 //google maps
 var map;
 var marker;
-function initMap() {
-    map = new google.maps.Map(document.getElementById('map'), {
-        disableDefaultUI: true
-    });
-}
+// function initMap() {
+//     map = new google.maps.Map(document.getElementById('map'), {
+//         disableDefaultUI: true
+//     });
+// }
 //firebase
 // Initialize Firebase
 var config = {
@@ -66,60 +67,60 @@ dbRefMarkers.on('child_removed', function (data) {
 
 
 //get current position
-navigator.geolocation.getCurrentPosition(onSuccess, onError, { enableHighAccuracy: true });
-function onSuccess(position) {
-    // coordinates
-    var myCoords = {lat: position.coords.latitude, lng: position.coords.longitude};
-    //set center
-    map.setCenter(myCoords);
-    //marker
-    marker = new google.maps.Marker({
-        position: myCoords
-        });
-    //set zoom
-    map.setZoom(13);
-    //set marker
-    marker.setMap(map);
+// navigator.geolocation.getCurrentPosition(onSuccess, onError, { enableHighAccuracy: true });
+// function onSuccess(position) {
+//     // coordinates
+//     var myCoords = {lat: position.coords.latitude, lng: position.coords.longitude};
+//     //set center
+//     map.setCenter(myCoords);
+//     //marker
+//     marker = new google.maps.Marker({
+//         position: myCoords
+//         });
+//     //set zoom
+//     map.setZoom(13);
+//     //set marker
+//     marker.setMap(map);
     
-    save.addEventListener('click', function () {
-        //get value of name
-        var nameValue = locName.value;
-        //get value of description
-        var descValue = locDesc.value;
-        //if values are empty
-        if (!nameValue) {
-            nameValue = 'No name';
-        }
-        if (!descValue) {
-            descValue = 'No description';
-        }
-        //data object
-        var data = {
-            latitude: myCoords.lat,
-            longitude: myCoords.lng,
-            name: nameValue,
-            desc: descValue
-        };
-        //save data to firebase
-        dbRefMarkers.push(data);
-        //disable name text
-        locName.disabled = 'true';
-        //disable discription text
-        locDesc.disabled = 'true';
-        //disable button
-        this.disabled = 'true';
-        this.style.backgroundColor = '#93ced6';
-        //message
-        message.style.display = 'block';
-        message.innerHTML = '<p>Position saved. Please, scroll down to see all saved positions. Or tap Refresh Position to get new position.</p>'
-    });
-    refresh.addEventListener('click', function () {
-        //reload the page
-        location.reload();
-        alert('Location refreshed');
-    });
-}
-function onError(error) {
-    alert('code: '    + error.code    + '\n' +
-        'message: ' + error.message + '\n');
-}
+//     save.addEventListener('click', function () {
+//         //get value of name
+//         var nameValue = locName.value;
+//         //get value of description
+//         var descValue = locDesc.value;
+//         //if values are empty
+//         if (!nameValue) {
+//             nameValue = 'No name';
+//         }
+//         if (!descValue) {
+//             descValue = 'No description';
+//         }
+//         //data object
+//         var data = {
+//             latitude: myCoords.lat,
+//             longitude: myCoords.lng,
+//             name: nameValue,
+//             desc: descValue
+//         };
+//         //save data to firebase
+//         dbRefMarkers.push(data);
+//         //disable name text
+//         locName.disabled = 'true';
+//         //disable discription text
+//         locDesc.disabled = 'true';
+//         //disable button
+//         this.disabled = 'true';
+//         this.style.backgroundColor = '#93ced6';
+//         //message
+//         message.style.display = 'block';
+//         message.innerHTML = '<p>Position saved. Please, scroll down to see all saved positions. Or tap Refresh Position to get new position.</p>'
+//     });
+//     refresh.addEventListener('click', function () {
+//         //reload the page
+//         location.reload();
+//         alert('Location refreshed');
+//     });
+// }
+// function onError(error) {
+//     alert('code: '    + error.code    + '\n' +
+//         'message: ' + error.message + '\n');
+// }
